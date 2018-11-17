@@ -30,20 +30,10 @@ Objekt3D* ReadFromFile(FILE* fp, Objekt3D* Objekt) {
 	Objekt->NizTrokuta = malloc(sizeof(Trokut)*Objekt->brojTrokuta);
 
 	for (int i = 0; i < (int)Objekt->brojTrokuta; i++) {
-		fread(&Objekt->NizTrokuta[i].xN, sizeof(float), 1, fp);
-		fread(&Objekt->NizTrokuta[i].yN, sizeof(float), 1, fp);
-		fread(&Objekt->NizTrokuta[i].zN, sizeof(float), 1, fp);
-
-		fread(&Objekt->NizTrokuta[i].Vrhovi.x1T, sizeof(float), 1, fp);
-		fread(&Objekt->NizTrokuta[i].Vrhovi.y1T, sizeof(float), 1, fp);
-		fread(&Objekt->NizTrokuta[i].Vrhovi.z1T, sizeof(float), 1, fp);
-		fread(&Objekt->NizTrokuta[i].Vrhovi.x2T, sizeof(float), 1, fp);
-		fread(&Objekt->NizTrokuta[i].Vrhovi.y2T, sizeof(float), 1, fp);
-		fread(&Objekt->NizTrokuta[i].Vrhovi.z2T, sizeof(float), 1, fp);
-		fread(&Objekt->NizTrokuta[i].Vrhovi.x3T, sizeof(float), 1, fp);
-		fread(&Objekt->NizTrokuta[i].Vrhovi.y3T, sizeof(float), 1, fp);
-		fread(&Objekt->NizTrokuta[i].Vrhovi.z3T, sizeof(float), 1, fp);
-
+		fread(&Objekt->NizTrokuta[i], sizeof(3*float), 3, fp);
+		
+		fread(&Objekt->NizTrokuta[i].Vrhovi.x1T, sizeof(9*float), 9, fp);
+		
 		fread(&Objekt->NizTrokuta[i].bojaTrokuta, sizeof(unsigned short), 1, fp);
 	}
 
@@ -56,20 +46,10 @@ void WriteToFile(FILE* fwp, Objekt3D* Objekt) {
 	fwrite(buffer, 1, 80, fwp);
 	fwrite(&Objekt->brojTrokuta, 4, 1, fwp);
 	for (int i = 0; i < (int)Objekt->brojTrokuta; i++) {
-		fwrite(&Objekt->NizTrokuta[i].xN, sizeof(float), 1, fwp);
-		fwrite(&Objekt->NizTrokuta[i].yN, sizeof(float), 1, fwp);
-		fwrite(&Objekt->NizTrokuta[i].zN, sizeof(float), 1, fwp);
-
-		fwrite(&Objekt->NizTrokuta[i].Vrhovi.x1T, sizeof(float), 1, fwp);
-		fwrite(&Objekt->NizTrokuta[i].Vrhovi.y1T, sizeof(float), 1, fwp);
-		fwrite(&Objekt->NizTrokuta[i].Vrhovi.z1T, sizeof(float), 1, fwp);
-		fwrite(&Objekt->NizTrokuta[i].Vrhovi.x2T, sizeof(float), 1, fwp);
-		fwrite(&Objekt->NizTrokuta[i].Vrhovi.y2T, sizeof(float), 1, fwp);
-		fwrite(&Objekt->NizTrokuta[i].Vrhovi.z2T, sizeof(float), 1, fwp);
-		fwrite(&Objekt->NizTrokuta[i].Vrhovi.x3T, sizeof(float), 1, fwp);
-		fwrite(&Objekt->NizTrokuta[i].Vrhovi.y3T, sizeof(float), 1, fwp);
-		fwrite(&Objekt->NizTrokuta[i].Vrhovi.z3T, sizeof(float), 1, fwp);
-
+		fwrite(&Objekt->NizTrokuta[i], sizeof(3*float), 3, fwp);
+	
+		fwrite(&Objekt->NizTrokuta[i].Vrhovi, sizeof(9*float), 9, fwp);
+		
 		fwrite(&Objekt->NizTrokuta[i].bojaTrokuta, sizeof(unsigned short), 1, fwp);
 	}
 
