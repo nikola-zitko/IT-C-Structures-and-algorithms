@@ -24,8 +24,8 @@ Objekt3D* ReadFromFile(FILE* fp, Objekt3D* Objekt) {
 	
 	fseek(fp, 80, SEEK_SET);
 
-    	fread(&objekt->brojTrokuta, sizeof(unsigned int), 1, fp);
-    	int n = objekt->brojTrokuta;
+    	fread(&Objekt->brojTrokuta, sizeof(unsigned int), 1, fp);
+    	int n = Objekt->brojTrokuta;
 
 
 	Objekt->NizTrokuta = malloc(sizeof(Trokut)*n);
@@ -55,8 +55,8 @@ void WriteToFile(FILE* fwp, Objekt3D* Objekt) {
 	char buffer[80]={0};
 	
 	fwrite(buffer, 1, 80, fwp);
-    	int n = objekt->brojTrokuta;
-	fwrite(&n, 4, 1, fp);
+    	int n = Objekt->brojTrokuta;
+	fwrite(&n, 4, 1, fwp);
 	for (int i = 0; i < n; i++) {
 		fwrite(&Objekt->NizTrokuta[i].xN, sizeof(float), 1, fwp);
 		fwrite(&Objekt->NizTrokuta[i].yN, sizeof(float), 1, fwp);
@@ -83,7 +83,7 @@ void WriteToTextFile(FILE* fwtp, Objekt3D* Objekt) {
 	
 	fprintf(fwtp, "solid OpenSCAD_Model\n");
 	
-	int n = objekt->brojTrokuta;
+	int n = Objekt->brojTrokuta;
 	for (int i = 0; i < n; i++) {
 		fprintf(fwtp, "facet normal %f %f %f\n", Objekt->NizTrokuta[i].xN, Objekt->NizTrokuta[i].yN, Objekt->NizTrokuta[i].zN);
 		fprintf(fwtp, "\t outer loop\n");
