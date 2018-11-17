@@ -51,10 +51,8 @@ Objekt3D* ReadFromFile(FILE* fp, Objekt3D* Objekt) {
 }
 
 void WriteToFile(FILE* fwp, Objekt3D* Objekt) {
-	char buffer[80];
-	for (int i = 0; i < 80; i++) {
-		buffer[i] = '0';
-	}
+	char buffer[80]={0};
+	
 	fwrite(buffer, 1, 80, fwp);
 	fwrite(&Objekt->brojTrokuta, 4, 1, fwp);
 	for (int i = 0; i < (int)Objekt->brojTrokuta; i++) {
