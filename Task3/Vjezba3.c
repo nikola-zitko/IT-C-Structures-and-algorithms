@@ -32,7 +32,6 @@ void presjek(int* nizA, int* nizB, int n1, int n2) {
 	start_t = clock();
 
 
-	int k = 0;
 	int n;
 	(n1 < n2) ? n = n1 : n = n2;
 	
@@ -40,10 +39,12 @@ void presjek(int* nizA, int* nizB, int n1, int n2) {
 
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
-			if (nizA[i] == nizB[j]) {
-				presjekNiza[k] = nizA[i];
-				k++;
-			}
+			//k je nepotreban, samo se umjesto njega koristi novodoklarirani int n i kreće se od najvećeg
+			//indeksa pa prema nuli (tj. --n)
+			//npr. ako je niz veličin n=10, prvo ćemo spremiti u presjekNiza[9], zatim presjekNiza[8] itd. umjesto
+			//sa k = 0, i k++ tj. presjekNiza[0] te presjekNiza[1]...
+			if (nizA[i] == nizB[j]) presjekNiza[--n] = nizA[i];
+			//time smo se rješili nepotrebne varijable k, i if funkciju napisali u jednoj liniji
 		}
 	}
 	end_t = clock();
