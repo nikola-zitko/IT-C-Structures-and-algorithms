@@ -1,4 +1,4 @@
-3. Laboratorijska vježba
+4. Laboratorijska vježba
 
 Algoritmi sortiranja 
 
