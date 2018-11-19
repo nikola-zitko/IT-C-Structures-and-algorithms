@@ -34,13 +34,8 @@ void presjek(int* nizA, int* nizB, int n1, int n2) {
 
 	int k = 0;
 	int n;
-	if (n1 < n2) {
-		n = n1;
-	}
-	else {
-		n = n2;
-	}
-
+	(n1 < n2) ? n = n1 : n = n2;
+	
 	int* presjekNiza = (int*)malloc(n * sizeof(int));
 
 	for (int i = 0; i < n; i++) {
