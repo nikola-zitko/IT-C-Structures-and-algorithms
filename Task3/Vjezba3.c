@@ -37,8 +37,8 @@ void presjek(int* nizA, int* nizB, int n1, int n2) {
 	
 	int* presjekNiza = (int*)malloc(n * sizeof(int));
 
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
+	for (int i = 0; i < n1; i++) {
+		for (int j = 0; j < n2; j++) {
 			if (nizA[i] == nizB[j]) presjekNiza[--n] = nizA[i];
 		}
 	}
