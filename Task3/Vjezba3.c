@@ -32,23 +32,14 @@ void presjek(int* nizA, int* nizB, int n1, int n2) {
 	start_t = clock();
 
 
-	int k = 0;
 	int n;
-	if (n1 < n2) {
-		n = n1;
-	}
-	else {
-		n = n2;
-	}
-
+	(n1 < n2) ? n = n1 : n = n2;
+	
 	int* presjekNiza = (int*)malloc(n * sizeof(int));
 
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			if (nizA[i] == nizB[j]) {
-				presjekNiza[k] = nizA[i];
-				k++;
-			}
+	for (int i = 0; i < n1; i++) {
+		for (int j = 0; j < n2; j++) {
+			if (nizA[i] == nizB[j]) presjekNiza[--n] = nizA[i];
 		}
 	}
 	end_t = clock();
