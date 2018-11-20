@@ -7,8 +7,6 @@ int cmpfunc(const void * a, const void * b) {
 	return (*(int*)a - *(int*)b);
 }
 
-int checkBigger
-
 int* generiraj(int n) {
 	int *niz = (int*)malloc(n * sizeof(int));
 	niz[0] = rand() % 3;
