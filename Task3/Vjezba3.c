@@ -66,7 +66,7 @@ void presjek_sortiran(int* nizA, int* nizB, int n1, int n2) {
 	printf("Ukupno vrijeme u sekundama: %f\n", total_t);
 }
 
-presjek_sortiran_qsort(int* nizA, int* nizB, int n1, int n2) {
+void presjek_sortiran_qsort(int* nizA, int* nizB, int n1, int n2) {
 	clock_t start_t, end_t;
 	double total_t;
 	start_t = clock();
