@@ -87,12 +87,14 @@ int partition(int *niz, int n) {
 	}
 
 void quicksort(int *niz, int n) {
-	if (n < 2)
-		return;
-
-	int pi = partition(niz, n);
-	quicksort(niz, pi);
-	quicksort(niz + pi + 1, n - pi - 1);
+    if (n < n_min) {
+        selectionsort(niz, n);
+    } else {
+        if (n < 2) return;
+        int pi = partition(niz, n);
+        quicksort(niz, pi);
+        quicksort(niz + pi + 1, n - pi - 1);
+    }
 }
 
 // merge sort
