@@ -75,27 +75,10 @@ int partition(int *niz, int n) {
 	}
 
 	while (l < r) {
-		if (niz[r] >= niz[0]) {
-			r--;
-		}
-		else if (niz[l] < niz[0]) {
-			l++;
-		}
-		else {
-			int tmp = niz[l];
-			niz[l] = niz[r];
-			niz[r] = tmp;
-		}
+        	(niz[r] >= niz[0]) ? r-- : (niz[l] < niz[0] ? l++ : &swap(niz[l], niz[r]);
 	}
-	if (niz[0] < niz[r]) { // 1
-		return 0;
-	}
-	else { // 3
-		int tmp = niz[r];
-		niz[r] = niz[0];
-		niz[0] = tmp;
-		return r;
-	}
+	if (niz[0] < niz[r]) return 0;
+	else swap(&niz[0], &niz[r]);
 }
 
 void quicksort(int *niz, int n) {
