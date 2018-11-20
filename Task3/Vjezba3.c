@@ -32,13 +32,12 @@ void presjek(int* nizA, int* nizB, int n1, int n2) {
 	double total_t;
 	start_t = clock();
 	
-	int k = 0;
 	int n = SMALLER(n1, n2);
 	int* presjekNiza = (int*)malloc(n * sizeof(int));
 
 	for (int i = 0; i < n1; i++) {
 		for (int j = 0; j < n2; j++) {
-			if (nizA[i] == nizB[j]) presjekNiza[k++] = nizA[i];
+			if (nizA[i] == nizB[j]) presjekNiza[--n] = nizA[i];
 		}
 	}
 	end_t = clock();
@@ -51,7 +50,6 @@ void presjek_sortiran(int* nizA, int* nizB, int n1, int n2) {
 	double total_t;
 	start_t = clock();
 
-	int k = 0;
 	int n = SMALLER(n1, n2);
 	int* presjekNiza = (int*)malloc(n * sizeof(int));
 
@@ -59,7 +57,7 @@ void presjek_sortiran(int* nizA, int* nizB, int n1, int n2) {
 	for (int i = 0; i < n; i++) {
 		presjek = (int*)bsearch(&nizA[i], nizB, n, sizeof(int), cmpfunc);
 		if (presjek != NULL) {
-			presjekNiza[k++] = *presjek;
+			presjekNiza[--n] = *presjek;
 		}
 	}
 	
@@ -73,7 +71,6 @@ presjek_sortiran_qsort(int* nizA, int* nizB, int n1, int n2) {
 	double total_t;
 	start_t = clock();
 
-	int k = 0;
 	int n = SMALLER(n1, n2);
 	int* presjekNiza = (int*)malloc(n * sizeof(int));
 
@@ -84,7 +81,7 @@ presjek_sortiran_qsort(int* nizA, int* nizB, int n1, int n2) {
 	for (int i = 0; i < n; i++) {
 		presjek = (int*)bsearch(&nizA[i], nizB, n, sizeof(int), cmpfunc);
 		if (presjek != NULL) {
-			presjekNiza[k++] = *presjek;
+			presjekNiza[--n] = *presjek;
 		}
 	}
 
