@@ -41,7 +41,7 @@ void presjek(int* nizA, int* nizB, int n1, int n2) {
 		}
 	}
 	end_t = clock();
-	total_t = (double)((end_t - start_t) / CLOCKS_PER_SEC);
+	total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
 	printf("Ukupno vrijeme u sekundama: %f\n", total_t);
 }
 
@@ -62,7 +62,7 @@ void presjek_sortiran(int* nizA, int* nizB, int n1, int n2) {
 	}
 	
 	end_t = clock();
-	total_t = (double)((end_t - start_t) / CLOCKS_PER_SEC);
+	total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
 	printf("Ukupno vrijeme u sekundama: %f\n", total_t);
 }
 
@@ -86,7 +86,7 @@ void presjek_sortiran_qsort(int* nizA, int* nizB, int n1, int n2) {
 	}
 
 	end_t = clock();
-	total_t = (double)((end_t - start_t) / CLOCKS_PER_SEC);
+	total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
 	printf("Ukupno vrijeme u sekundama: %f\n", total_t);
 }
 
@@ -109,7 +109,7 @@ void main() {
 	shuffle(nizB, n2);
 
 	//izracun presjeka dva ne sortirana niza
-	//printf("izracun presjeka dva ne sortirana niza\n");
+	//printf("Izracun presjeka dva ne sortirana niza: \n");
 	//presjek(nizA, nizB, n1, n2);
 
 	//izracun presjeka sortiranog i nesortiranog
