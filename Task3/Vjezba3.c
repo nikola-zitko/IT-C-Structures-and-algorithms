@@ -28,26 +28,30 @@ void shuffle(int *niz, int n) {
 }
 
 void presjek(int* nizA, int* nizB, int n1, int n2) {
-	clock_t start_t, end_t, total_t;
+	clock_t start_t, end_t;
+	double total_t;
 	start_t = clock();
-
+	
+	int k = 0;
 	int n = SMALLER(n1, n2);
 	int* presjekNiza = (int*)malloc(n * sizeof(int));
 
 	for (int i = 0; i < n1; i++) {
 		for (int j = 0; j < n2; j++) {
-			if (nizA[i] == nizB[j]) presjekNiza[--n] = nizA[i];
+			if (nizA[i] == nizB[j]) presjekNiza[k++] = nizA[i];
 		}
 	}
 	end_t = clock();
-	total_t = (int)((end_t - start_t) / CLOCKS_PER_SEC);
-	printf("Ukupno vrijeme u sekundama: %d\n", total_t);
+	total_t = (double)((end_t - start_t) / CLOCKS_PER_SEC);
+	printf("Ukupno vrijeme u sekundama: %f\n", total_t);
 }
 
 void presjek_sortiran(int* nizA, int* nizB, int n1, int n2) {
-	clock_t start_t, end_t, total_t;
+	clock_t start_t, end_t;
+	double total_t;
 	start_t = clock();
 
+	int k = 0;
 	int n = SMALLER(n1, n2);
 	int* presjekNiza = (int*)malloc(n * sizeof(int));
 
@@ -55,19 +59,21 @@ void presjek_sortiran(int* nizA, int* nizB, int n1, int n2) {
 	for (int i = 0; i < n; i++) {
 		presjek = (int*)bsearch(&nizA[i], nizB, n, sizeof(int), cmpfunc);
 		if (presjek != NULL) {
-			presjekNiza[--n] = *presjek;
+			presjekNiza[k++] = *presjek;
 		}
 	}
 	
 	end_t = clock();
-	total_t = (int)((end_t - start_t) / CLOCKS_PER_SEC);
-	printf("Ukupno vrijeme u sekundama: %d\n", total_t);
+	total_t = (double)((end_t - start_t) / CLOCKS_PER_SEC);
+	printf("Ukupno vrijeme u sekundama: %f\n", total_t);
 }
 
 presjek_sortiran_qsort(int* nizA, int* nizB, int n1, int n2) {
-	clock_t start_t, end_t, total_t;
+	clock_t start_t, end_t;
+	double total_t;
 	start_t = clock();
 
+	int k = 0;
 	int n = SMALLER(n1, n2);
 	int* presjekNiza = (int*)malloc(n * sizeof(int));
 
@@ -78,13 +84,13 @@ presjek_sortiran_qsort(int* nizA, int* nizB, int n1, int n2) {
 	for (int i = 0; i < n; i++) {
 		presjek = (int*)bsearch(&nizA[i], nizB, n, sizeof(int), cmpfunc);
 		if (presjek != NULL) {
-			presjekNiza[--n] = *presjek;
+			presjekNiza[k++] = *presjek;
 		}
 	}
 
 	end_t = clock();
-	total_t = (int)((end_t - start_t) / CLOCKS_PER_SEC);
-	printf("Ukupno vrijeme u sekundama: %d\n", total_t);
+	total_t = (double)((end_t - start_t) / CLOCKS_PER_SEC);
+	printf("Ukupno vrijeme u sekundama: %f\n", total_t);
 }
 
 void main() {
@@ -110,14 +116,14 @@ void main() {
 	//presjek(nizA, nizB, n1, n2);
 
 	//izracun presjeka sortiranog i nesortiranog
-	printf("izracun presjeka sortiranog i nesortiranog\n");
+	printf("Izracun presjeka sortiranog i nesortiranog: \n");
 	nizA = generiraj(n1);
 	shuffle(nizA, n1);
 	nizB = generiraj(n2);
 	presjek_sortiran(nizA, nizB, n1, n2);
 
 	// -//- sa qsort
-	printf("izracun presjeka sortiranog i nesortiranog sa qsort\n");
+	printf("Izracun presjeka sortiranog i nesortiranog sa qsort: \n");
 	nizA = generiraj(n1);
 	shuffle(nizA, n1);
 	nizB = generiraj(n2);
