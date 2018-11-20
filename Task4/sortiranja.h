@@ -4,6 +4,7 @@
 #include<stdbool.h>
 
 bool choose_pivot;
+int n_min;
 int* generate(int n);
 void print(int *niz, int n);
 void selectionsort(int *niz, int n);
