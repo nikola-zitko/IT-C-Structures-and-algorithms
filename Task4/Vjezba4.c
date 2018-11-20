@@ -4,8 +4,6 @@
 #include<stdbool.h>
 #include "sortiranja.h"
 
-
-
 void main() {
 
 	int *niz;
