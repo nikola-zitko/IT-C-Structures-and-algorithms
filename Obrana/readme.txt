@@ -1,2 +1,2 @@
 Funkcije definirane u longnumber.h file-u.
-Vecinom baratanje s listama.
+Vecinom baratanje sa listama.
