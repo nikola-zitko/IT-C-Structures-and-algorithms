@@ -75,7 +75,7 @@ int partition(int *niz, int n) {
 	}
 
 	while (l < r) {
-        	(niz[r] >= niz[0]) ? r-- : (niz[l] < niz[0] ? l++ : &swap(niz[l], niz[r]);
+        	(niz[r] >= niz[0]) ? r-- : (niz[l] < niz[0] ? l++ : swap(&niz[l], &niz[r]));
 	}
 	if (niz[0] < niz[r]) return 0;
 	else swap(&niz[0], &niz[r]);
