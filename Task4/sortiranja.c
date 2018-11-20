@@ -12,6 +12,9 @@ void swap(int *a, int *b)
  *b = tmp;
 }
 
+// globalna n_min varijabla
+int n_min;
+
 //globalna boolean varijabla
 bool choose_pivot = false;
 
@@ -75,11 +78,13 @@ int partition(int *niz, int n) {
 	}
 
 	while (l < r) {
-        	(niz[r] >= niz[0]) ? r-- : (niz[l] < niz[0] ? l++ : swap(&niz[l], &niz[r]));
+        (niz[r] >= niz[0]) ? (r--) : ((niz[l] < niz[0]) ? (l++) : (swap(&niz[l], &niz[r])));
 	}
 	if (niz[0] < niz[r]) return 0;
-	else swap(&niz[0], &niz[r]);
-}
+	else {
+	    swap(&niz[r], &niz[0]);
+	    return r;
+	}
 
 void quicksort(int *niz, int n) {
 	if (n < 2)
