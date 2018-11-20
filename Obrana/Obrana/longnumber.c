@@ -271,28 +271,23 @@ LongNumber mul_by_pow10(LongNumber num, int pot) {
 LongNumber mul_longnum(LongNumber a, LongNumber b) {
 	int num1 = 0, num2 = 0, i=0;
 	LongNumber f = NULL, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
+	b = reverse(b);
 	LongNumber tmp = a, tmpB = b;
-	while (a != NULL) {
-		num1 = (num1*10) + a->z;
-		a = a->next;
-	}
-	a = tmp;
+	
+	
 	tmp1 = mul_by_pow10(a, 0);
-	a = tmp;
-	tmp2 = mul_by_digit(tmp1, 7);
+	tmp2 = mul_by_digit(tmp1, b->z);
 	b = b->next;
 	tmp3 = mul_by_pow10(a, 1);
-	a = tmp;
-	tmp4 = mul_by_digit(tmp3, 8);
+	tmp4 = mul_by_digit(tmp3, b->z);
 	b = b->next;
 	tmp5 = mul_by_pow10(a, 2);
-	a = tmp;
-	tmp6 = mul_by_digit(tmp5, 9);
+	tmp6 = mul_by_digit(tmp5, b->z);
 	b = b->next;
 	b = tmpB;
 	tmp1 = add_longnum(tmp2, tmp4);
 	tmp3 = add_longnum(tmp1, tmp6);
-	
+
 	f = tmp3;
 	return f;
 }
