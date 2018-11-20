@@ -1,21 +1,16 @@
 #ifndef LONGNUM_H
 #define LONGNUM_H
 
-// jedna dekadska znamenka (0-9)
+
 typedef struct _Digit {
 	int z;
-	struct _Digit *next;
+	struct _Digit* next;
 } Digit;
 
-// "dugi" broj je lista znamenaka. Najmanje znacajna znamenka je na pocetku liste
 typedef Digit* LongNumber;
 
-// pomocna funkcija koja okrece listu znamenaka, trebati ce na vise mjesta
-// jer ce se operacije uglavnom oslanjati na dodavanje u glavu liste
-// ne gradi novu listu nego preuredjuje dobivenu listu
+LongNumber addElement(LongNumber num, int z);
 LongNumber reverse(LongNumber num);
-
-// cita broj iz tekstualne datoteke znamenku po znamenku i gradi listu (dugi broj)
 LongNumber read_longnum(char* fname);
 
 // zapisuje broj u tekstualnu datoteku znamenku po znamenku

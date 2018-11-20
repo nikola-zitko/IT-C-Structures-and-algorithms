@@ -15,12 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="D:\Users\NICK\C-C++\dodatna_vjezba_longnum\main.c">
+    <ClCompile Include="longnumber.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\Users\NICK\C-C++\dodatna_vjezba_longnum\longnumber.h">
+    <ClInclude Include="longnumber.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -139,10 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="D:\Users\NICK\C-C++\dodatna_vjezba_longnum\main.c" />
+    <ClCompile Include="longnumber.c" />
+    <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\Users\NICK\C-C++\dodatna_vjezba_longnum\longnumber.h" />
+    <ClInclude Include="longnumber.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
