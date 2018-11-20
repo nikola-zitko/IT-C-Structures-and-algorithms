@@ -1,8 +1,6 @@
 #ifndef SORTIRANJA_H_
 #define SORTIRANJA_H_
 
-#include<stdbool.h>
-
 bool choose_pivot;
 int n_min;
 int* generate(int n);
