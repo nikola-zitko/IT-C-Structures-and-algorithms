@@ -3,8 +3,16 @@
 #include <malloc.h>
 #include <time.h>
 #include <stdbool.h>
-//globalna boolean varijabla
+#define MEDIAN(a, b, c)((((a)-(b))*((b)-(c))) > (-1) ? (b) : (((a-b)*(a-c)) < (1) ? (a) : (c)))
 
+void swap(int *a, int *b)
+{
+ int tmp = *a;
+ *a = *b;
+ *b = tmp;
+}
+
+//globalna boolean varijabla
 bool choose_pivot = false;
 
 // generiranje i ispis niza
@@ -62,27 +70,8 @@ int partition(int *niz, int n) {
 	r = n - 1;
 	
 	if (choose_pivot == 1) {
-		int prvi, drugi, treci, medijan, tmp;
-		prvi = niz[0];
-		drugi = niz[n / 2];
-		treci = niz[n - 1];
-		if (((prvi >= drugi) && (prvi <= treci)) || ((prvi <= drugi) && (prvi >= treci))) {
-			medijan = prvi;
-		}
-		else if (((drugi >= prvi) && (drugi <= treci)) || ((drugi <= prvi) && (drugi >= treci))) {
-			medijan = drugi;
-			tmp = niz[0];
-			niz[0] = drugi;
-			niz[n / 2] = tmp;
-			
-		}
-		else {
-			medijan = treci;
-			tmp = niz[0];
-			niz[0] = treci;
-			niz[n - 1] = tmp;
-		}
-
+		if (MEDIAN(niz[0], niz[n / 2], niz[n - 1]) == niz[n / 2]) swap(&niz[0], &niz[n / 2]);
+		else if (MEDIAN(niz[0], niz[n / 2], niz[n - 1]) == niz[n - 1]) swap(&niz[0], &niz[n - 1]);
 	}
 
 	while (l < r) {
@@ -123,7 +112,7 @@ void merge(int *niz, int *niza, int na, int *nizb, int nb) {
 	// implemntirati merge funkciju
 }
 
-// alocira i vraæa kopiju niza
+// alocira i vraÃ¦a kopiju niza
 int* duplicate(int *niz, int n) {
 	int i;
 	int *novi = (int*)malloc(sizeof(int)*n);
@@ -137,7 +126,7 @@ void mergesort(int *niz, int n) {
 	// implementirati
 }
 
-// mjerenje vremena izvoðenja funkcije sortiranja
+// mjerenje vremena izvoÃ°enja funkcije sortiranja
 double measure(void(*sort)(int *niz, int n), int *niz, int n) {
 	int start_time = clock();
 	sort(niz, n);
