@@ -242,7 +242,6 @@ LongNumber mul_by_pow10(LongNumber num, int pot) {
 		num = num->next;
 
 	}
-	num = tmp;
 	while (prijenos > 0) {
 		if (prijenos > 10) {
 			e = addElement(e, prijenos % 10);
@@ -253,6 +252,7 @@ LongNumber mul_by_pow10(LongNumber num, int pot) {
 			prijenos = 0;
 		}
 	}
+	num = tmp;
 	num = reverse(num);
 	
 	return e;
@@ -269,12 +269,9 @@ LongNumber mul_by_pow10(LongNumber num, int pot) {
 // Gradi se potpuno nova lista (broj) kao rezultat.
 
 LongNumber mul_longnum(LongNumber a, LongNumber b) {
-	int num1 = 0, num2 = 0, i=0;
 	LongNumber f = NULL, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
 	b = reverse(b);
-	LongNumber tmp = a, tmpB = b;
-	
-	
+
 	tmp1 = mul_by_pow10(a, 0);
 	tmp2 = mul_by_digit(tmp1, b->z);
 	b = b->next;
@@ -284,10 +281,10 @@ LongNumber mul_longnum(LongNumber a, LongNumber b) {
 	tmp5 = mul_by_pow10(a, 2);
 	tmp6 = mul_by_digit(tmp5, b->z);
 	b = b->next;
-	b = tmpB;
+
 	tmp1 = add_longnum(tmp2, tmp4);
 	tmp3 = add_longnum(tmp1, tmp6);
-
+	
 	f = tmp3;
 	return f;
 }
