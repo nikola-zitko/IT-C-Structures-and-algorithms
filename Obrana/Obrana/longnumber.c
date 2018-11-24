@@ -269,9 +269,17 @@ LongNumber mul_by_pow10(LongNumber num, int pot) {
 // Gradi se potpuno nova lista (broj) kao rezultat.
 
 LongNumber mul_longnum(LongNumber a, LongNumber b) {
-	LongNumber f = NULL, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
+	LongNumber tmp1, tmp2;
 	b = reverse(b);
-
+	LongNumber suma = NULL;
+	int i=0;
+	while(b!=NULL){
+	tmp1=mul_by_power10(a, i);
+	tmp2=mul_by_digit(tmp1, b->z);
+	suma=add_longnum(suma, tmp2);
+	b=b->next;
+	i++;
+        }
 	tmp1 = mul_by_pow10(a, 0);
 	tmp2 = mul_by_digit(tmp1, b->z);
 	b = b->next;
@@ -282,9 +290,9 @@ LongNumber mul_longnum(LongNumber a, LongNumber b) {
 	tmp6 = mul_by_digit(tmp5, b->z);
 	b = b->next;
 
-	tmp1 = add_longnum(tmp2, tmp4);
-	tmp3 = add_longnum(tmp1, tmp6);
+
+
 	
-	f = tmp3;
-	return f;
+	
+	return suma;
 }
