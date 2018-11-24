@@ -279,20 +279,9 @@ LongNumber mul_longnum(LongNumber a, LongNumber b) {
 	suma=add_longnum(suma, tmp2);
 	b=b->next;
 	i++;
-        }
-	tmp1 = mul_by_pow10(a, 0);
-	tmp2 = mul_by_digit(tmp1, b->z);
-	b = b->next;
-	tmp3 = mul_by_pow10(a, 1);
-	tmp4 = mul_by_digit(tmp3, b->z);
-	b = b->next;
-	tmp5 = mul_by_pow10(a, 2);
-	tmp6 = mul_by_digit(tmp5, b->z);
-
-
-
-
+	}
 	
 	
+
 	return suma;
 }
