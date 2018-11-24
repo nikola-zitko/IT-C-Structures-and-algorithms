@@ -26,7 +26,6 @@ LongNumber reverse(LongNumber num) {
 
 	//provjera je li lista prazna ili ima samo jedan clan
 	if (current == NULL) {
-		printf("Prazna lista");
 		return current;
 	}
 	else if (current->next == NULL) {
@@ -269,22 +268,15 @@ LongNumber mul_by_pow10(LongNumber num, int pot) {
 // Gradi se potpuno nova lista (broj) kao rezultat.
 
 LongNumber mul_longnum(LongNumber a, LongNumber b) {
-	LongNumber f = NULL, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
+	LongNumber tmp1, suma = NULL;
 	b = reverse(b);
+	int i = 0;
+	while (b != NULL) {
+		tmp1 = mul_by_digit(mul_by_pow10(a, i), b->z);
+		suma = add_longnum(suma, tmp1);
+		b = b->next;
+		i++;
+	}
 
-	tmp1 = mul_by_pow10(a, 0);
-	tmp2 = mul_by_digit(tmp1, b->z);
-	b = b->next;
-	tmp3 = mul_by_pow10(a, 1);
-	tmp4 = mul_by_digit(tmp3, b->z);
-	b = b->next;
-	tmp5 = mul_by_pow10(a, 2);
-	tmp6 = mul_by_digit(tmp5, b->z);
-	b = b->next;
-
-	tmp1 = add_longnum(tmp2, tmp4);
-	tmp3 = add_longnum(tmp1, tmp6);
-	
-	f = tmp3;
-	return f;
+	return suma;
 }
