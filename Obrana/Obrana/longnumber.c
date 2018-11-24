@@ -288,7 +288,7 @@ LongNumber mul_longnum(LongNumber a, LongNumber b) {
 	b = b->next;
 	tmp5 = mul_by_pow10(a, 2);
 	tmp6 = mul_by_digit(tmp5, b->z);
-	b = b->next;
+
 
 
 
