@@ -4,6 +4,7 @@
 #include <time.h>
 #include <stdbool.h>
 #define MEDIAN(a, b, c)((((a)-(b))*((b)-(c))) > (-1) ? (b) : (((a-b)*(a-c)) < (1) ? (a) : (c)))
+#include "sortiranja.h"
 
 void swap(int *a, int *b)
 {
