@@ -5,9 +5,9 @@
 int readWord(FILE *fd, char *buffer)
 {
 	int c;
-	
+
 	do {
-		c = fgetc(fd);				
+		c = fgetc(fd);
 		if(c == EOF)
 			return 0;
 	} while(!isalpha(c));
@@ -29,7 +29,7 @@ void main()
 	FILE *fd;
 	char buffer[1024];
 	Dictionary dict;
-				
+
 	fd = fopen("liar.txt", "rt");
 	if(fd == NULL)
 	{
@@ -37,16 +37,20 @@ void main()
 		return;
 	}
 
-	//dict = create();
+	dict = create();
+
 	while(readWord(fd, buffer))
 	{
-		printf("%s\n", buffer);
-		//add(dict, buffer);
+		add(dict, buffer);
 	}
 
 	fclose(fd);
 
-	//print(dict);
+	// filtriraj po kriterijima odredjenim filter() funkcijom
+    filterDictionary(dict, filter);
 
-	//destroy(dict);
+	print(dict);
+
+	destroy(dict);
+
 }
