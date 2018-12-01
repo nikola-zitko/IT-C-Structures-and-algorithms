@@ -19,32 +19,13 @@ LongNumber addElement(LongNumber num, int z) {
 // ne gradi novu listu nego preuredjuje dobivenu listu
 
 LongNumber reverse(LongNumber num) {
-	//trenutni, sljedeci i prethodni element liste
-	LongNumber current = num;
-	LongNumber prev = NULL;
-	LongNumber next = NULL;
-
-	//provjera je li lista prazna ili ima samo jedan clan
-	if (current == NULL) {
-		return current;
+	LongNumber n = NULL;
+	while (num != NULL) {
+		n = addElement(n, num->z);
+		num = num->next;
 	}
-	else if (current->next == NULL) {
-		return current;
-	}
-
-	while (current != NULL) {
-		//postavimo sljedeci
-		next = current->next;
-		//preusmjerimo pokazivac trenutnog na prethodnog
-		current->next = prev;
-		//pomaknemo pokazivace jednu poziciju naprijed
-		prev = current;
-		current = next;
-	}
-	//postavljamo novi "head" liste
-	return prev;
+	return n;
 }
-
 // cita broj iz tekstualne datoteke znamenku po znamenku i gradi listu (dugi broj)
 LongNumber read_longnum(char* fname) {
 
@@ -52,15 +33,20 @@ LongNumber read_longnum(char* fname) {
 	if (fp == NULL) {
 		printf("Greska pri otvaranju datoteke!");
 	}
+
 	LongNumber head = NULL;
-	int broj;
-	fscanf(fp, "%d", &broj);
-	while (broj > 0) {
-		head = addElement(head, (broj % 10));
-		broj /= 10;
-	}
-	fclose(fp);
+	char broj;
+	do {
+		broj = fgetc(fp);
+		if (feof(fp)) {
+			break;
+		}
+		int i = broj - '0';
+		head = addElement(head, i);
+	} while (1);
 	
+	fclose(fp);
+
 	return head;
 } 
 
@@ -78,7 +64,8 @@ void write_longnum(LongNumber num, char* fname) {
 
 // ispisuje broj na ekran 
 void print_longnum(LongNumber num) {
-	const LongNumber tmp = num;
+	num = reverse(num);
+	LongNumber tmp = num;
 	if (num == NULL) {
 		printf("Prazna lista!");
 	}
@@ -87,7 +74,8 @@ void print_longnum(LongNumber num) {
 		num = num->next;
 	}
 	printf("\n");
-	num = tmp;
+	num = reverse(num);
+	
 }
 
 // oslobadja listu znamenaka
@@ -113,68 +101,40 @@ void delete_longnum(LongNumber num) {
 // Algoritam zbraja znamenku po znamenku i prenosi ostatak na iducu znamenku.
 // Gradi se potpuno nova lista (broj) kao rezultat.
 LongNumber add_longnum(LongNumber a, LongNumber b) {
-	a = reverse(a);
 	LongNumber tmpA = a;
-	b = reverse(b);
 	LongNumber tmpB = b;
-	
 	LongNumber c = NULL;
-	int prijenos = 0, zbroj=0;
-	while (a || b) {
-		if (a==NULL && b!=NULL) {
-			zbroj = (b->z) + prijenos;
-			if (zbroj > 9) {
-				c = addElement(c, zbroj % 10);
-				prijenos = zbroj / 10;
-			}
-			else {
-				c = addElement(c, zbroj);
-				prijenos = 0;
-			}
-			b = b->next;
-			
+	int prijenos = 0, zbroj = 0;
+	int tempA, tempB;
+	while (a || b || prijenos > 0) {
+		if (a == NULL) {
+			tempA = 0;
 		}
-		else if(a!=NULL && b==NULL) {
-			zbroj = (a->z) + prijenos;
-			if (zbroj > 9) {
-				c = addElement(c, zbroj % 10);
-				prijenos = zbroj / 10;
-			}
-			else {
-				c = addElement(c, zbroj);
-				prijenos = 0;
-			}
+		else {
+			tempA = a->z;
 			a = a->next;
 		}
-		else if(a!=NULL && b!=NULL){
-			zbroj = (a->z) + (b->z) + prijenos;
-			if (zbroj > 9) {
-				c = addElement(c, zbroj % 10);
-				prijenos = zbroj / 10;
-			}
-			else {
-				c = addElement(c, zbroj);
-				prijenos = 0;
-			}
-			a = a->next;
+		if (b == NULL) {
+			tempB = 0;
+		}
+		else {
+			tempB = b->z;
 			b = b->next;
 		}
-	}
-	while (prijenos > 0) {
-		if (prijenos > 9) {
-			c = addElement(c, (prijenos % 10));
+
+		zbroj = tempA + tempB + prijenos;
+		if (zbroj > 9) {
+			c = addElement(c, zbroj % 10);
 			prijenos = zbroj / 10;
 		}
 		else {
-			c = addElement(c, prijenos);
-			prijenos = 0;
+			c = addElement(c, zbroj);
+			prijenos = zbroj / 10;
 		}
 	}
-	
 	a = tmpA;
 	b = tmpB;
-	a = reverse(a);
-	b = reverse(b);
+	c = reverse(c);
 	return c;
 }
 
@@ -182,13 +142,19 @@ LongNumber add_longnum(LongNumber a, LongNumber b) {
 // Gradi se potpuno nova lista (broj) kao rezultat.
 LongNumber mul_by_digit(LongNumber num, int z) {
 	LongNumber d = NULL;
-	int prijenos = 0, umnozak;
-	
-	num = reverse(num);
+	int prijenos = 0, umnozak, tmpN;
 	LongNumber tmp = num;
-	
-	while (num != NULL) {
-		umnozak = (num->z)*z + prijenos;
+	 
+	while (num != NULL || prijenos>0) {
+		if (num == NULL) {
+			tmpN = 0;
+		}
+		else {
+			tmpN = num->z;
+			num = num->next;
+		}
+		umnozak = tmpN*z + prijenos;
+
 		if ((umnozak) > 9) {
 			
 			d = addElement(d, (umnozak%10));
@@ -198,63 +164,36 @@ LongNumber mul_by_digit(LongNumber num, int z) {
 			d = addElement(d, umnozak);
 			prijenos = 0;
 		}
-		num = num->next;
-		
-	}
-	while(prijenos > 0) {
-		if (prijenos > 10) {
+		if (num == NULL && prijenos > 10) {
 			d = addElement(d, prijenos % 10);
 			prijenos = prijenos / 10;
 		}
-		else {
-			d = addElement(d, prijenos % 10);
+		else if(num == NULL){
+			d = addElement(d, prijenos);
 			prijenos = 0;
 		}
+		
+		
 	}
 	num = tmp;
-	num = reverse(num);
-	
+	d = reverse(d);
 	return d;
 }
 
 // pomocna funkcija koja mnozi broj sa potencijom od 10 (odnosno dodaje nule na pocetak broja)
 // Gradi se potpuno nova lista (broj) kao rezultat.
-LongNumber mul_by_pow10(LongNumber num, int pot) {
-	int prijenos = 0, umnozak = 0;
-	
-	num = reverse(num);
+LongNumber mul_by_pow10(LongNumber num, int pow) {
 	
 	LongNumber tmp = num;
-	LongNumber e = NULL;
-
-	while (num != NULL) {
-		umnozak = (num->z)*pow(10,pot) + prijenos;
-		if ((umnozak) > 9) {
-
-			e = addElement(e, (umnozak % 10));
-			prijenos = umnozak / 10;
-		}
-		else {
-			e = addElement(e, umnozak);
-			prijenos = 0;
-		}
-		num = num->next;
-
+	if (num == NULL) {
+		return NULL;
 	}
-	while (prijenos > 0) {
-		if (prijenos > 10) {
-			e = addElement(e, prijenos % 10);
-			prijenos = prijenos / 10;
-		}
-		else {
-			e = addElement(e, prijenos % 10);
-			prijenos = 0;
-		}
-	}
-	num = tmp;
-	num = reverse(num);
 	
-	return e;
+	for (int i = 0; i < pow; i++) {
+		num = addElement(num, 0);
+	}
+
+	return num;
 }
 
 // mnozi dva broja oslanjanjuci se na prethodne funkcije. Primjer:
@@ -268,15 +207,17 @@ LongNumber mul_by_pow10(LongNumber num, int pot) {
 // Gradi se potpuno nova lista (broj) kao rezultat.
 
 LongNumber mul_longnum(LongNumber a, LongNumber b) {
-	LongNumber tmp1, suma = NULL;
-	b = reverse(b);
+	LongNumber tmp1, tmp2, suma = NULL;
 	int i = 0;
 	while (b != NULL) {
-		tmp1 = mul_by_digit(mul_by_pow10(a, i), b->z);
-		suma = add_longnum(suma, tmp1);
+		tmp1 = mul_by_pow10(a, i);
+		tmp2 = mul_by_digit(tmp1, b->z);
+		suma = add_longnum(suma, tmp2);
 		b = b->next;
 		i++;
 	}
+	free(tmp1);
+	free(tmp2);
 
 	return suma;
 }

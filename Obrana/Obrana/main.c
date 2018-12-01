@@ -17,9 +17,6 @@ void main() {
 	LongNumber nume = mul_by_pow10(numd, 3);
 	print_longnum(nume);
 	
-	numa = read_longnum("a.txt");
-	numb = read_longnum("b.txt");
-	
 	LongNumber numf = mul_longnum(numa, numb);
 	print_longnum(numf);
 	
