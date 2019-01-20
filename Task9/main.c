@@ -17,7 +17,6 @@ State NewGame(){
 }
 
 void PrintState(State* s){
-    for(int i=0; i<2; i++){
         if(s->vuk == 0)
             printf("Vuk ");
         if(s->ovca == 0)
@@ -36,7 +35,6 @@ void PrintState(State* s){
         if(s->kupus == 1)
             printf("Kupus ");
         printf("\n");
-    }
 }
 
 void NextStates(State* s, State* nstates){
